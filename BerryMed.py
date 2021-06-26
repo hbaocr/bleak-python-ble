@@ -22,8 +22,9 @@ import logging
 #from logging import error
 from bleak import BleakScanner,BleakClient
 
-deviceName ="Nordic_HRM"
-notify_char_uuid="00002a37-0000-1000-8000-00805f9b34fb"
+deviceName ="BerryMed"
+notify_char_uuid="49535343-1e4d-4bd9-ba61-23c647249616"
+
 
 async def run():
     devices = await BleakScanner.discover()
