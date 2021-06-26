@@ -1,0 +1,33 @@
+Python3 virtualenv Jupyter score
+
+
+==> To install virtual env wrapper
+# https://opensource.com/article/21/2/python-virtualenvwrapper
+# https://anbasile.github.io/posts/2017-06-25-jupyter-venv/
+
+#https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
+
+==> To run with score
+
+1. Interminal  create python virtualenv  name venvPython and active this one 
+
+	mkvirtualenv venvPython
+
+2. install ipykernel to run jupyter in virtualenv. If you have done it before skip this step
+
+	pip install ipykernel
+
+3. run jupyter kernel inside virtualenv to active the Jupiter kernel
+
+	ipython kernel install --user --name=PPG2ECG
+
+4. Jump into project folder
+	
+	code .
+
+5. Install the missing package (optional)
+6. Open Jupiter notebook file(*.ipynp)  then select  kernel PPG2ECG
+
+
+#install package
+
