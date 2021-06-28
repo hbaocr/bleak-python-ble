@@ -9,9 +9,9 @@ Python3 virtualenv Jupyter score
 
 ==> To run with score
 
-1. Interminal  create python virtualenv  name venvPython and active this one 
+1. Interminal  create python virtualenv  name venvBleak and active this one 
 
-	mkvirtualenv venvPython
+	mkvirtualenv venvBleak
 
 2. install ipykernel to run jupyter in virtualenv. If you have done it before skip this step
 
