@@ -1,3 +1,7 @@
 bleak
 asyncio
 construct
+numpy
+scipy
+matplotlib
+csaps
