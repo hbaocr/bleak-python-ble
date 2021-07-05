@@ -43,8 +43,8 @@ def smoothing_signal(xf_,yf_,smooth_=0.99):
     nyf = csaps(xf_, yf_, xf_, smooth=0.99)
     return nyf
 
-# RR < 0.6hz
-def find_HR_RR(xf_,yf_,rr_max=0.6):
+# 0.1Hz < RR < 0.6hz
+def find_HR_RR(xf_,yf_,rr_max=0.6,rr_min=0.1):
         hr_idx = np.argmax(yf_)
         hr = xf_[hr_idx]*60
         #nyf = yf_ #yf_[:(hr_idx)] # get idx from 0...HR peak to find RR
@@ -54,7 +54,7 @@ def find_HR_RR(xf_,yf_,rr_max=0.6):
         rr_index=0
         for rr_idx in peaks:
             tmp=xf_[rr_idx]
-            if(tmp<rr_max and tmp>rr):
+            if(tmp<rr_max and tmp>rr and tmp>rr_min):
                 rr = tmp
                 rr_index=rr_idx
 
@@ -75,8 +75,17 @@ def ppg2rr(ppg,fs,debug = False):
         peaks =np.array([rr_idx,hr_idx])
         plt.plot(xf,yf,'y')
         plt.plot(xf,smoothing_freq,'r')
-        plt.plot(xf[peaks],smoothing_freq[peaks],'x')
+        #plt.plot(xf[peaks],smoothing_freq[peaks],'x')
+        plt.plot(xf[rr_idx],smoothing_freq[rr_idx],'*')
+        plt.text(xf[rr_idx],smoothing_freq[rr_idx],f"RR:{rr//1} bpm")
+
+        plt.plot(xf[hr_idx],smoothing_freq[hr_idx],'o')
+        plt.text(xf[hr_idx],smoothing_freq[hr_idx],f"HR:{hr//1} bpm")
         plt.grid(True)
         plt.show()
     return hr,rr
+
+def resample(signal, f_signal,f_target=125):
+    resample_rate = f_signal/f_target
+    return np.interp(np.arange(0, len(signal), resample_rate), np.arange(0, len(signal)), signal)
 

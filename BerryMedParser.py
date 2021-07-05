@@ -33,4 +33,4 @@ def parse(packet:bytearray):
         packet_dict['pulse_rate'] = packet[offset+3] | ((packet[offset+2] & 0x40) << 1)
         offset=offset+data_step
         print(packet_dict['pleth']) #100Hz PPG
-
+        
