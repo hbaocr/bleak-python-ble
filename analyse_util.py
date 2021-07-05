@@ -47,14 +47,18 @@ def smoothing_signal(xf_,yf_,smooth_=0.99):
 def find_HR_RR(xf_,yf_,rr_max=0.6):
         hr_idx = np.argmax(yf_)
         hr = xf_[hr_idx]*60
-        nyf = yf_ #yf_[:(hr_idx)] # get idx from 0...HR peak to find RR
+        #nyf = yf_ #yf_[:(hr_idx)] # get idx from 0...HR peak to find RR
+        nyf =yf_[:(hr_idx)]
         peaks, _ = find_peaks(nyf, height=0)
         rr=0
+        rr_index=0
         for rr_idx in peaks:
             tmp=xf_[rr_idx]
             if(tmp<rr_max and tmp>rr):
                 rr = tmp
-        return hr,rr*60
+                rr_index=rr_idx
+
+        return hr,rr*60,hr_idx,rr_index
 
 def ppg2rr(ppg,fs,debug = False):
     f_dc_remove = 0.15
@@ -63,11 +67,12 @@ def ppg2rr(ppg,fs,debug = False):
     # fft
     xf,yf=fft_analyse(ppg_f,fs)
     smoothing_freq=smoothing_signal(xf, yf)
-    hr,rr=find_HR_RR(xf,smoothing_freq);
+    hr,rr,hr_idx,rr_idx=find_HR_RR(xf,smoothing_freq);
     if debug==True:
         print("rr= %d bpm"%(math.floor(rr)))
         print("hr= %d bpm"%(math.floor(hr)))
-        peaks, _ = find_peaks(smoothing_freq, height=0)
+        #peaks, _ = find_peaks(smoothing_freq, height=0)
+        peaks =np.array([rr_idx,hr_idx])
         plt.plot(xf,yf,'y')
         plt.plot(xf,smoothing_freq,'r')
         plt.plot(xf[peaks],smoothing_freq[peaks],'x')

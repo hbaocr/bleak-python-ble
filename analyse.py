@@ -10,7 +10,7 @@ ppg = np.loadtxt(filename)
 print(np.size(ppg))
 tmp = time.time_ns()
 # turn debug = true to see the graph. To run, this paras is False
-hr,rr=analyse_util.ppg2rr(ppg,fs,debug=True)
+hr,rr=analyse_util.ppg2rr(ppg,fs,debug=False)
 print(">>> the process take: %d ms "%((time.time_ns()-tmp)/1000000))
 
 print("rr= %d bpm"%(math.floor(rr)))
