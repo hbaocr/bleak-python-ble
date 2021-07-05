@@ -2,7 +2,7 @@ import analyse_util #import fft_analyse,butter_highpass,butter_lowpass,iir_notch
 import numpy as np
 import time
 import math
-filename =  'ppg.csv'
+filename =  'ppg.csv' #100Hz file
 filename =  'ppg_40Hz.csv'
 fs = 25
 ppg = np.loadtxt(filename)
