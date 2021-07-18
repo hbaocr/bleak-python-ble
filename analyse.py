@@ -3,9 +3,10 @@ import numpy as np
 import time
 import math
 filename =  'ppg.csv' #100Hz file
-filename =  'ppg_100Hz.csv'
+filename =  'ppg_25Hz.csv'
+filename = "ppg_berrymed_100Hz.csv"
 fs = 100
-ppg = np.loadtxt(filename)
+ppg = np.loadtxt(filename)[0:4000]
 
 '''
 F_target=100
